@@ -2,7 +2,8 @@
 --
     import "github.com/shantanubhadoria/go-kalmanfilter/kalmanfilter"
 
-Package kalmanfilter implements Kalman Filter(Linear Quadratic Estimation) support for Go language
+Package kalmanfilter implements Kalman Filter(Linear Quadratic Estimation)
+support for Go language
 
 [![Travis CI](https://img.shields.io/travis/shantanubhadoria/go-kalmanfilter.svg?style=flat-square)](https://travis-ci.org/shantanubhadoria/go-kalmanfilter) [![GoDoc](https://godoc.org/github.com/shantanubhadoria/go-kalmanfilter/kalmanfilter?status.svg)](https://godoc.org/github.com/shantanubhadoria/go-kalmanfilter/kalmanfilter)
 
@@ -85,6 +86,11 @@ approximately close to how Kalman filter and sensor fusion work.
 State Sensor: ![Milestone](/corpus/milestone.jpg)
 
 Delta Sensor: ![Speedometer](/corpus/speedometer.png)
+
+
+### Author
+
+Shantanu Bhadoria <shantanu att cpan dot org> https://www.shantanubhadoria.com
 
 ## Usage
 

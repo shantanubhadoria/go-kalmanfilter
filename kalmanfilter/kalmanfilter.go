@@ -96,6 +96,10 @@ State Sensor:
 Delta Sensor:
 ![Speedometer](/corpus/speedometer.png)
 
+Author
+
+Shantanu Bhadoria <shantanu att cpan dot org> https://www.shantanubhadoria.com
+
 */
 package kalmanfilter
 
