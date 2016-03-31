@@ -87,9 +87,13 @@ data and your average speed since you pass the last milestone your result will
 be much more accurate irrespective of how much time has passed. That is
 approximately close to how Kalman filter and sensor fusion work.
 
-State Sensor: [![Milestone](/corpus/milestone.jpg)]
+State Sensor: 
 
-Delta Sensor: [![Speedometer](/corpus/speedometer.png)]
+![Milestone](/corpus/milestone.jpg =160x120)
+
+Delta Sensor: 
+
+![Speedometer](/corpus/speedometer.png =222x152)
 
 ## Usage
 
