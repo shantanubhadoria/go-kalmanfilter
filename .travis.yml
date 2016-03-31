@@ -1,4 +1,4 @@
 language: go
 go:
         - 1.6
-go_import_path: github.com/shantanubhadoria/go-kalmanfilter
+go_import_path: github.com/shantanubhadoria/go-kalmanfilter/kalmanfilter
