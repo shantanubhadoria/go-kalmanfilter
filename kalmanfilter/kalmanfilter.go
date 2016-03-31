@@ -79,7 +79,7 @@ updated alongside
 
 */
 type FilterData struct {
-  
+
 /*
 Angle the state sensor value. In a IMU this would be the 
 Accelerometer
@@ -100,7 +100,8 @@ Bias is recalculated(optimised) at each new sensor reading.
 Covariance Matrix a 2d 2x2 matrix (also known as dispersion 
 matrix or variance-covariance matrix) is a matrix whose 
 element in the i, j position is the covariance between the i
-and j elements of a random vector.
+and j elements of a random vector. Leave this at default 
+value of [[0,0],[0,0]]
 */
   Covariance [2][2]float64
 
