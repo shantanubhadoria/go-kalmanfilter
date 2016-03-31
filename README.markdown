@@ -89,11 +89,11 @@ approximately close to how Kalman filter and sensor fusion work.
 
 State Sensor: 
 
-![Milestone](/corpus/milestone.jpg =160x120)
+![Milestone](/corpus/milestone.jpg)
 
 Delta Sensor: 
 
-![Speedometer](/corpus/speedometer.png =222x152)
+![Speedometer](/corpus/speedometer.png)
 
 ## Usage
 
