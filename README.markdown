@@ -1,11 +1,14 @@
-# kalman
+# kalmanfilter
 --
     import "."
 
 ### Introduction
 
-Package Kalman implements Kalman Filter(Linear Quadratic Estimation) support for
-Go language
+Package kalmanfilter implements Kalman Filter(Linear Quadratic Estimation)
+support for Go language
+
+[![Travis
+CI](https://img.shields.io/travis/shantanubhadoria/go-kalmanfilter.svg?style=flat-square)](https://travis-ci.org/shantanubhadoria/go-kalmanfilter)
 
 Source and Bug reports at
 
