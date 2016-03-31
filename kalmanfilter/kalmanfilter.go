@@ -1,10 +1,9 @@
 /*
-[![Travis CI](https://img.shields.io/travis/shantanubhadoria/go-kalmanfilter.svg?style=flat-square)](https://travis-ci.org/shantanubhadoria/go-kalmanfilter)
+Package kalmanfilter implements Kalman Filter(Linear Quadratic Estimation) support for Go language
+
+[![Travis CI](https://img.shields.io/travis/shantanubhadoria/go-kalmanfilter.svg?style=flat-square)](https://travis-ci.org/shantanubhadoria/go-kalmanfilter) [![GoDoc](https://godoc.org/github.com/shantanubhadoria/go-kalmanfilter/kalmanfilter?status.svg)](https://godoc.org/github.com/shantanubhadoria/go-kalmanfilter/kalmanfilter)
 
 Introduction
-
-Package kalmanfilter implements Kalman Filter(Linear Quadratic 
-Estimation) support for Go language
 
 Source and Bug reports at 
 
