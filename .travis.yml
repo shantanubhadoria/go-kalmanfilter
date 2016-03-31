@@ -1,10 +1,4 @@
 language: go
-sudo: required
 go:
         - 1.6
-install:
-  - go get github.com/robfig/glock
-  - go install github.com/robfig/glock
-script:
-  - cd 
-  - go test ./...
+go_import_path: github.com/shantanubhadoria/go-kalmanfilter
