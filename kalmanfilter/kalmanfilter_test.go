@@ -2,9 +2,11 @@ package kalmanfilter
 
 import(
   "testing"
+  "fmt"
 )
 
 
 func testNew(t *testing.T) {
-  new(kalmanfilter.filterData(0,0,0,0,0))
+  filterData := new(FilterData)
+  fmt.Println(filterData)
 }
