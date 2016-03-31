@@ -27,18 +27,43 @@
 <pre><code>import "github.com/shantanubhadoria/go-kalmanfilter/kalmanfilter"
 </code></pre>
 
+<p><a href="https://travis-ci.org/shantanubhadoria/go-kalmanfilter"><img src="https://img.shields.io/travis/shantanubhadoria/go-kalmanfilter.svg?style=flat-square" alt="Travis
+CI"></a></p>
+
 <h3>
 <a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Introduction</h3>
 
 <p>Package kalmanfilter implements Kalman Filter(Linear Quadratic Estimation)
 support for Go language</p>
 
-<p><a href="https://travis-ci.org/shantanubhadoria/go-kalmanfilter"><img src="https://img.shields.io/travis/shantanubhadoria/go-kalmanfilter.svg?style=flat-square" alt="Travis
-CI"></a></p>
-
 <p>Source and Bug reports at</p>
 
 <pre><code>https://github.com/shantanubhadoria/go-math-filter-kalman
+</code></pre>
+
+<h3>
+<a id="synopsis" class="anchor" href="#synopsis" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Synopsis</h3>
+
+<pre><code>package main
+
+import (
+  "fmt"
+  "time"
+  "github.com/shantanubhadoria/go-kalmanfilter/"
+)
+
+myFilterData = new(kalmanfilter.FilterData)
+
+var oldTime time.Time = time.Now()
+for {
+  stateReading := float64(getStateSensorReading()) // in units X
+  deltaReading := float64(getDeltaSensorReading()) // in unit X per nanosecond
+
+  var newTime time.Time = time.Now()
+  var duration Duration = newTime.Sub(oldTime)
+  oldTime = newTime
+  newState := myFilterData.Update(stateReading, deltaReading, int64(duration/time.Nanosecond))
+}
 </code></pre>
 
 <h3>
@@ -90,11 +115,6 @@ Kalman filter works.</p>
 <a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
 
 <h4>
-<a id="func--updatefilter" class="anchor" href="#func--updatefilter" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>func  UpdateFilter</h4>
-
-<div class="highlight highlight-source-go"><pre><span class="pl-k">func</span> <span class="pl-en">UpdateFilter</span>()</pre></div>
-
-<h4>
 <a id="type-filterdata" class="anchor" href="#type-filterdata" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>type FilterData</h4>
 
 <div class="highlight highlight-source-go"><pre><span class="pl-k">type</span> <span class="pl-v">FilterData</span> <span class="pl-k">struct</span> {
@@ -119,7 +139,8 @@ Kalman filter works.</p>
 <span class="pl-c">       Covariance Matrix a 2d 2x2 matrix (also known as dispersion</span>
 <span class="pl-c">       matrix or variance-covariance matrix) is a matrix whose</span>
 <span class="pl-c">       element in the i, j position is the covariance between the i</span>
-<span class="pl-c">       and j elements of a random vector.</span>
+<span class="pl-c">       and j elements of a random vector. Leave this at default</span>
+<span class="pl-c">       value of [[0,0],[0,0]]</span>
 <span class="pl-c">    */</span>
     <span class="pl-v">Covariance</span> [<span class="pl-c1">2</span>][<span class="pl-c1">2</span>]<span class="pl-k">float64</span>
 
@@ -130,6 +151,11 @@ Kalman filter works.</p>
 
 <p>FilterData struct, initialize this struct before commencing any operations, as
 sensors are read, this struct must be updated alongside</p>
+
+<h4>
+<a id="func-filterdata-update" class="anchor" href="#func-filterdata-update" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>func (*FilterData) Update</h4>
+
+<div class="highlight highlight-source-go"><pre><span class="pl-k">func</span> <span class="pl-en">(<span class="pl-v">filterData</span> *<span class="pl-v">FilterData</span>) <span class="pl-en">Update</span></span>(<span class="pl-v">stateReading</span>, <span class="pl-v">deltaReading</span>, <span class="pl-v">deltaTime</span> <span class="pl-v">float64</span>) <span class="pl-v">float64</span></pre></div>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/shantanubhadoria/go-kalmanfilter">Go-kalmanfilter</a> is maintained by <a href="https://github.com/shantanubhadoria">shantanubhadoria</a>.</span>
