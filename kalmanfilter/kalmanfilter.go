@@ -31,6 +31,7 @@ Synopsis
     var duration Duration = newTime.Sub(oldTime)
     oldTime = newTime
     newState := myFilterData.Update(stateReading, deltaReading, int64(duration/time.Nanosecond))
+    fmt.Println(newState)
   }
 
 Description
@@ -134,4 +135,5 @@ value of [[0,0],[0,0]]
 }
 
 func (filterData *FilterData) Update(stateReading, deltaReading, deltaTime float64 ) float64{
+  return float64(0)
 }
