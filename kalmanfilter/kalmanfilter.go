@@ -79,28 +79,29 @@ updated alongside
 
 */
 type FilterData struct {
-  /*
-  Angle the state sensor value. In a IMU this would be the 
-  Accelerometer
-  */ 
+  
+/*
+Angle the state sensor value. In a IMU this would be the 
+Accelerometer
+*/ 
   Angle float64
 
-  /*
-  Bias: the delta sensor calculation. This is the deviation 
-  from last base state value as calculted from the delta 
-  sensor. In a IMU this would be the product of time since 
-  last reading and the delta sensor value
+/*
+Bias: the delta sensor calculation. This is the deviation 
+from last base state value as calculted from the delta 
+sensor. In a IMU this would be the product of time since 
+last reading and the delta sensor value
 
-  Bias is recalculated(optimised) at each new sensor reading.
-  */
+Bias is recalculated(optimised) at each new sensor reading.
+*/
   Bias float64
 
-  /*
-  Covariance Matrix a 2d 2x2 matrix (also known as dispersion 
-  matrix or variance-covariance matrix) is a matrix whose 
-  element in the i, j position is the covariance between the i
-  and j elements of a random vector.
-  */
+/*
+Covariance Matrix a 2d 2x2 matrix (also known as dispersion 
+matrix or variance-covariance matrix) is a matrix whose 
+element in the i, j position is the covariance between the i
+and j elements of a random vector.
+*/
   Covariance [2][2]float64
 
   QAngle float64
