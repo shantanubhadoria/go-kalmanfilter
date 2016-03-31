@@ -142,8 +142,7 @@ value of [[0,0],[0,0]]
 }
 
 /*
-Update Method
-Call this method to update the state value based on sensor fusion of state and delta sensor and the previously calculate reading to get progressively more accurate state value
+Call this method to update the state value based on sensor fusion of state and delta sensor and the previously calculated reading to get progressively more accurate state values
 */
 func (filterData *FilterData) Update(stateReading, deltaReading, deltaTime float64 ) float64{
   rate := deltaReading - filterData.Bias
