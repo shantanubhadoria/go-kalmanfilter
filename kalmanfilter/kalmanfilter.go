@@ -105,18 +105,17 @@ updated alongside
 type FilterData struct {
 
 /*
-Angle the state sensor value. In a IMU this would be the 
+State the state sensor value. In a IMU this would be the 
 Accelerometer
 */ 
-  Angle float64
+  State float64
 
 /*
-Bias: the delta sensor calculation. This is the deviation 
-from last base state value as calculted from the delta 
-sensor. In a IMU this would be the product of time since 
-last reading and the delta sensor value
-
-Bias is recalculated(optimised) at each new sensor reading.
+Bias: the delta sensor error. This is the deviation 
+from sensor reading and actual value. Bias can be caused by 
+electromagnetic interference and represents a permanent error
+in delta sensor reading. Bias is detected by averaging the 
+delta sensor reading at stationary state of delta sensor
 */
   Bias float64
 
@@ -135,5 +134,26 @@ value of [[0,0],[0,0]]
 }
 
 func (filterData *FilterData) Update(stateReading, deltaReading, deltaTime float64 ) float64{
-  return float64(0)
+  rate := deltaReading - filterData.Bias
+  state := filterData.State + (rate * deltaTime)
+
+  filterData.Covariance[0][0] += deltaTime * (deltaTime * filterData.Covariance[1][1] - filterData.Covariance[0][1] - filterData.Covariance[1][0] + filterData.QAngle)
+  filterData.Covariance[0][1] -= deltaTime * filterData.Covariance[1][1]
+  filterData.Covariance[1][0] -= deltaTime * filterData.Covariance[1][1]
+  filterData.Covariance[1][1] += deltaTime * filterData.QBias
+
+  innovationCovariance := filterData.Covariance[0][0] + filterData.RMeasure
+
+  kalmanGain := []float64{filterData.Covariance[0][0]/innovationCovariance, filterData.Covariance[1][0]/innovationCovariance}
+
+  y := stateReading - state
+  filterData.State += kalmanGain[0] * y
+  filterData.Bias += kalmanGain[1] * y
+
+  filterData.Covariance[0][0] -= kalmanGain[0] * filterData.Covariance[0][0]
+  filterData.Covariance[0][1] -= kalmanGain[0] * filterData.Covariance[0][1]
+  filterData.Covariance[1][0] -= kalmanGain[1] * filterData.Covariance[1][0]
+  filterData.Covariance[1][1] -= kalmanGain[1] * filterData.Covariance[1][1]
+  
+  return filterData.State
 }
