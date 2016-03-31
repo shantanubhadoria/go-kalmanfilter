@@ -36,6 +36,7 @@ Source and Bug reports at
       var duration Duration = newTime.Sub(oldTime)
       oldTime = newTime
       newState := myFilterData.Update(stateReading, deltaReading, int64(duration/time.Nanosecond))
+      fmt.Println(newState)
     }
 
 
@@ -63,25 +64,32 @@ Gyroscopes and Accelerometers.
 
 While Accelerometer is usually used to measure gravity it can be used to measure
 the inclination of a body with respect to the surface of earth along the x and y
-axis(not z axis as Z axis is usually facing the opposite direction as the force
-of gravity) by measuring the direction in which the force of gravity is applied.
+axis(not z axis as Z axis faces the direction opposite the direction of
+gravitional force) by measuring the direction in which the force of gravity is
+felt.
 
-Gyroscope measures the rate of rotation about one or all the axis of a body.
-while it gives fairly accurate estimation of the angular velocity, if we use it
+Gyroscope measures the rate of rotation about one or all the axes of a body.
+While it gives fairly accurate estimation of the angular velocity, if we use it
 to calculate the current inclination based on the starting inclination and the
 angular velocity, there is a lot of drift, which means the gyroscope error will
 accumulate over time as we calculate newer angles based on previous angle and
-angular velocity and the error in angular velocity piles on.
+angular velocity and the error in angular velocity piles on leading to
+increasingly inaccurate estimations as time passes.
 
-A real life example of how Kalman filter works is while driving on a highway in
-a car. If you take the time passed since when your started driving and your
-estimated average speed every hour and use it to calculate the distance you have
-traveled your calculation will become more inaccurate as you drive on.
+A real life example of how Kalman filter works is noticed while driving on a
+highway in a car. If you take the time passed since when your started driving
+and your estimated average speed since then and use it to calculate the distance
+you have traveled your calculation will become more inaccurate as time passes.
 
-This is drift in value. However if you watch each milestone and calculate your
-current position using milestone data and your speed since the last milestone
-your result will be much more accurate. That is approximately close to how
-Kalman filter works.
+This is drift in value. However if you correct based on each milestone marker
+that you pass through and re-calculate your distance travelled using milestone
+data and your average speed since you pass the last milestone your result will
+be much more accurate irrespective of how much time has passed. That is
+approximately close to how Kalman filter and sensor fusion work.
+
+State Sensor: [![Milestone](/corpus/milestone.jpg)]
+
+Delta Sensor: [![Speedometer](/corpus/speedometer.png)]
 
 ## Usage
 
@@ -91,18 +99,17 @@ Kalman filter works.
 type FilterData struct {
 
 	/*
-	   Angle the state sensor value. In a IMU this would be the
+	   State the state sensor value. In a IMU this would be the
 	   Accelerometer
 	*/
-	Angle float64
+	State float64
 
 	/*
-	   Bias: the delta sensor calculation. This is the deviation
-	   from last base state value as calculted from the delta
-	   sensor. In a IMU this would be the product of time since
-	   last reading and the delta sensor value
-
-	   Bias is recalculated(optimised) at each new sensor reading.
+	   Bias: the delta sensor error. This is the deviation
+	   from sensor reading and actual value. Bias can be caused by
+	   electromagnetic interference and represents a permanent error
+	   in delta sensor reading. Bias is detected by averaging the
+	   delta sensor reading at stationary state of delta sensor
 	*/
 	Bias float64
 

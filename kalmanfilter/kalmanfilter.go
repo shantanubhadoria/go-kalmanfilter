@@ -65,32 +65,41 @@ orientation of objects using Gyroscopes and Accelerometers.
 While Accelerometer is usually used to measure gravity 
 it can be used to measure the inclination of a body 
 with respect to the surface of earth along the x and y 
-axis(not z axis as Z axis is usually facing the opposite 
-direction as the force of gravity) by measuring the 
-direction in which the force of gravity is applied.
+axis(not z axis as Z axis faces the direction opposite 
+the direction of gravitional force) by measuring the 
+direction in which the force of gravity is felt.
 
 Gyroscope measures the rate of rotation about one or all 
-the axis of a body. while it gives fairly accurate 
+the axes of a body. While it gives fairly accurate 
 estimation of the angular velocity, if we use it to 
 calculate the current inclination based on the starting 
 inclination and the angular velocity, there is a lot of 
 drift, which means the gyroscope error will accumulate 
 over time as we calculate newer angles based on previous 
 angle and angular velocity and the error in angular 
-velocity piles on.
+velocity piles on leading to increasingly inaccurate 
+estimations as time passes.
 
-A real life example of how Kalman filter works is while 
-driving on a highway in a car. If you take the time 
+A real life example of how Kalman filter works is noticed 
+while driving on a highway in a car. If you take the time 
 passed since when your started driving and your estimated 
-average speed every hour and use it to calculate 
+average speed since then and use it to calculate 
 the distance you have traveled your calculation will become 
-more inaccurate as you drive on.
+more inaccurate as time passes.
 
-This is drift in value. However if you watch each milestone 
-and calculate your current position using milestone data 
-and your speed since the last milestone your result will be 
-much more accurate. That is approximately close to how 
-Kalman filter works.
+This is drift in value. However if you correct based on
+each milestone marker that you pass through and re-calculate your 
+distance travelled using milestone data and your average speed 
+since you pass the last milestone your result will be 
+much more accurate irrespective of how much time has passed. 
+That is approximately close to how Kalman filter and sensor 
+fusion work.
+
+State Sensor:
+[![Milestone](/corpus/milestone.jpg)]
+
+Delta Sensor:
+[![Speedometer](/corpus/speedometer.png)]
 
 */
 package kalmanfilter
@@ -154,6 +163,6 @@ func (filterData *FilterData) Update(stateReading, deltaReading, deltaTime float
   filterData.Covariance[0][1] -= kalmanGain[0] * filterData.Covariance[0][1]
   filterData.Covariance[1][0] -= kalmanGain[1] * filterData.Covariance[1][0]
   filterData.Covariance[1][1] -= kalmanGain[1] * filterData.Covariance[1][1]
-  
+
   return filterData.State
 }
