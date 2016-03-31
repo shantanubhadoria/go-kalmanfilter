@@ -1,14 +1,37 @@
 /*
+[![Travis CI](https://img.shields.io/travis/shantanubhadoria/go-kalmanfilter.svg?style=flat-square)](https://travis-ci.org/shantanubhadoria/go-kalmanfilter)
+
 Introduction
 
 Package kalmanfilter implements Kalman Filter(Linear Quadratic 
 Estimation) support for Go language
 
-[![Travis CI](https://img.shields.io/travis/shantanubhadoria/go-kalmanfilter.svg?style=flat-square)](https://travis-ci.org/shantanubhadoria/go-kalmanfilter)
-
 Source and Bug reports at 
 
   https://github.com/shantanubhadoria/go-math-filter-kalman
+
+Synopsis
+
+  package main
+
+  import (
+    "fmt"
+    "time"
+    "github.com/shantanubhadoria/go-kalmanfilter/"
+  )
+
+  myFilterData = new(kalmanfilter.FilterData)
+
+  var oldTime time.Time = time.Now()
+  for {
+    stateReading := float64(getStateSensorReading()) // in units X
+    deltaReading := float64(getDeltaSensorReading()) // in unit X per nanosecond
+
+    var newTime time.Time = time.Now()
+    var duration Duration = newTime.Sub(oldTime)
+    oldTime = newTime
+    newState := myFilterData.Update(stateReading, deltaReading, int64(duration/time.Nanosecond))
+  }
 
 Description
     
@@ -110,5 +133,5 @@ value of [[0,0],[0,0]]
   RMeasure float64
 }
 
-func UpdateFilter() {
+func (filterData *FilterData) Update(stateReading, deltaReading, deltaTime float64 ) float64{
 }

@@ -2,17 +2,41 @@
 --
     import "github.com/shantanubhadoria/go-kalmanfilter/kalmanfilter"
 
+[![Travis
+CI](https://img.shields.io/travis/shantanubhadoria/go-kalmanfilter.svg?style=flat-square)](https://travis-ci.org/shantanubhadoria/go-kalmanfilter)
+
+
 ### Introduction
 
 Package kalmanfilter implements Kalman Filter(Linear Quadratic Estimation)
 support for Go language
 
-[![Travis
-CI](https://img.shields.io/travis/shantanubhadoria/go-kalmanfilter.svg?style=flat-square)](https://travis-ci.org/shantanubhadoria/go-kalmanfilter)
-
 Source and Bug reports at
 
     https://github.com/shantanubhadoria/go-math-filter-kalman
+
+### Synopsis
+
+    package main
+
+    import (
+      "fmt"
+      "time"
+      "github.com/shantanubhadoria/go-kalmanfilter/"
+    )
+
+    myFilterData = new(kalmanfilter.FilterData)
+
+    var oldTime time.Time = time.Now()
+    for {
+      stateReading := float64(getStateSensorReading()) // in units X
+      deltaReading := float64(getDeltaSensorReading()) // in unit X per nanosecond
+
+      var newTime time.Time = time.Now()
+      var duration Duration = newTime.Sub(oldTime)
+      oldTime = newTime
+      newState := myFilterData.Update(stateReading, deltaReading, int64(duration/time.Nanosecond))
+    }
 
 
 ### Description
@@ -61,12 +85,6 @@ Kalman filter works.
 
 ## Usage
 
-#### func  UpdateFilter
-
-```go
-func UpdateFilter()
-```
-
 #### type FilterData
 
 ```go
@@ -92,7 +110,8 @@ type FilterData struct {
 	   Covariance Matrix a 2d 2x2 matrix (also known as dispersion
 	   matrix or variance-covariance matrix) is a matrix whose
 	   element in the i, j position is the covariance between the i
-	   and j elements of a random vector.
+	   and j elements of a random vector. Leave this at default
+	   value of [[0,0],[0,0]]
 	*/
 	Covariance [2][2]float64
 
@@ -104,3 +123,9 @@ type FilterData struct {
 
 FilterData struct, initialize this struct before commencing any operations, as
 sensors are read, this struct must be updated alongside
+
+#### func (*FilterData) Update
+
+```go
+func (filterData *FilterData) Update(stateReading, deltaReading, deltaTime float64) float64
+```
