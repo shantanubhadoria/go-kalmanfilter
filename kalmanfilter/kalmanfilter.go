@@ -81,3 +81,6 @@ var Covariance [2][2]float64
 var QAngle float64 = 0.001
 var QBias float64 = 0.003
 var RMeasure float64 = 0.003
+
+func New(angle, bias, qangle, qbias, rmeasure float64) {
+}

@@ -95,3 +95,9 @@ var QBias float64 = 0.003
 ```go
 var RMeasure float64 = 0.003
 ```
+
+#### func  New
+
+```go
+func New(angle, bias, qangle, qbias, rmeasure float64)
+```
