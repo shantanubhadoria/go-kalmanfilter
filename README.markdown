@@ -14,11 +14,11 @@ Source and Bug reports at
 
 ### Description
 
-The Kalman filter, also known as linear quadratic estimation (LQE), is an
-algorithm that uses a series of measurements observed over time, containing
-noise (random variations) and other inaccuracies, and produces estimates of
-unknown variables that tend to be more precise than those based on a single
-measurement alone.
+The Kalman filter(https://en.wikipedia.org/wiki/Kalman_filter), also known as
+linear quadratic estimation (LQE), is an algorithm that uses a series of
+measurements observed over time, containing noise (random variations) and other
+inaccuracies, and produces estimates of unknown variables that tend to be more
+precise than those based on a single measurement alone.
 
 Algorithm is recursive, which means it takes the output of its previous
 calculations as a factor in calculating the next step which improves its
