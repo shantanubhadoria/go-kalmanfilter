@@ -96,10 +96,10 @@ That is approximately close to how Kalman filter and sensor
 fusion work.
 
 State Sensor:
-[![Milestone](/corpus/milestone.jpg)]
+[![Milestone](/corpus/milestone.jpg =160x120)]
 
 Delta Sensor:
-[![Speedometer](/corpus/speedometer.png)]
+[![Speedometer](/corpus/speedometer.png =222x152)]
 
 */
 package kalmanfilter
