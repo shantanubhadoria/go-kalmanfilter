@@ -48,17 +48,17 @@ Algorithm is recursive, which means it takes the output of its previous
 calculations as a factor in calculating the next step which improves its
 accuracy over time. The key to Kalman filters are two sensors with different
 kind of accuracy issues in each. Sensor A or the state sensor might give
-in-accurate value for a measurement on the whole but it doesn't drift. Sensor B
-or delta sensor gives gives much more accurate rate of change in value(or delta)
+inaccurate values for a measurement on the whole but it doesn't drift. Sensor B
+or delta sensor gives much more accurate rate of change in value(or delta)
 but it drifts over time due to its small inaccuracies as it only measures rate
-of change in value and not the actual value. Kalman filter uses this knowledge
+of change and not the actual value. Kalman filter uses this knowledge
 to fuse results from both sensors to give a state value which is more accurate
 than state value received from any of these filters alone.
 
 An example of application for this is calculating orientation of objects using
 Gyroscopes and Accelerometers.
 
-While Accelerometer is usually used to measure gravity it can be used to measure
+While an Accelerometer is usually used to measure gravity it can be used to measure
 the inclination of a body with respect to the surface of earth along the x and y
 axis(not z axis as Z axis faces the direction opposite the direction of
 gravitional force) by measuring the direction in which the force of gravity is
